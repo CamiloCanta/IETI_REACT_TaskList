@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
-function Task({ task, onDelete }) {
-  const [isCompleted, setIsCompleted] = useState(false);
-
-  const handleComplete = () => {
-    setIsCompleted(!isCompleted);
-  };
+function Task({ task, onDelete, onToggleCompletion }) {
+  const { description, completed } = task;
 
   const taskStyle = {
     marginRight: '8px',
-    textDecoration: isCompleted ? 'line-through' : 'none',
+    textDecoration: completed ? 'line-through' : 'none',
   };
 
   return (
     <li>
-      <input type="checkbox" checked={isCompleted} onChange={handleComplete} />
-      <span style={taskStyle}>{task}</span>
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={onToggleCompletion}
+      />
+      <span style={taskStyle}>{description}</span>
       <button onClick={onDelete}>Delete</button>
     </li>
   );
